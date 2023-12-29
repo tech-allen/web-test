@@ -12,6 +12,6 @@ export class Users {
     @Column()
     id2: number;
 
-    @Column()
-    user_id: string;
+    @Column({type: "varchar", name: "user_id"})
+    userId: string;
 }

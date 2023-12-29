@@ -17,16 +17,17 @@ export class UsersService {
     }
 
     queryOrCreateUserId(userReq: Users) {
-        // const results = this.usersRepository.findOneBy(userReq);
-        const results = this.usersRepository.findOneBy({
+        return this.usersRepository.findOneBy({
             id1: userReq.id1,
             id2: userReq.id2
-          });
-        if (!results) {
-            userReq.user_id = uuidv4();
-            this.usersRepository.save(userReq);
-            return userReq;
-        }
-        return results;
+        })
+        .then((result) => {
+            if (!result) {
+                userReq.userId = uuidv4();
+                this.usersRepository.save(userReq);
+                return userReq;
+            }
+            return result;
+        });
     }
 }
